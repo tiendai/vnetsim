@@ -181,7 +181,7 @@ public class frmMain {
 		frmVnetsim.getContentPane().setFont(myfont);
 		frmVnetsim.getContentPane().setLayout(new BorderLayout(0, 0));
 		frmVnetsim.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		frmVnetsim.setTitle("Vnetsim RC2 (build 11.0419) - Vũ Thành Công ĐT2-K52");
+		frmVnetsim.setTitle("Vnetsim 11 (build 11.0419) - Vũ Thành Công ĐT2-K52");
 		frmVnetsim.setBounds(100, 100, 1200, 800);
 		frmVnetsim.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
