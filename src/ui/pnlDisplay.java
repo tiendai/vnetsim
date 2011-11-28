@@ -7,7 +7,7 @@
  *
  * @Usage: Sử dụng để hiển thị đồ thị dưới dạng đồ họa
  *
- * @version 2.1 2011/4/19 
+ * @version 2.1 2011/11/27 
  */
 package ui;
 import java.awt.*;
