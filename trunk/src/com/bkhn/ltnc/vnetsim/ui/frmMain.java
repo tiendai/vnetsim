@@ -60,7 +60,7 @@ import javax.swing.JCheckBoxMenuItem;
 import java.awt.Toolkit;
 import javax.swing.ImageIcon;
 
-import com.bkhn.ltnc.vnetsim.algorithms.*;
+import com.bkhn.ltnc.vnetsim.algorithms.DesignGraph;
 import com.bkhn.ltnc.vnetsim.myobjects.Edge;
 import com.bkhn.ltnc.vnetsim.myobjects.Graph;
 import com.bkhn.ltnc.vnetsim.myobjects.Vertex;
@@ -71,14 +71,25 @@ import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class frmMain.
+ */
 public class frmMain {
 
+	/** The frm vnetsim. */
 	private JFrame frmVnetsim;			// Frame chương trình
+	
+	/** The frm progress. */
 	private JFrame frmProgress;			// Frame quá trình hoạt động
+	
+	/** The frm prop. */
 	private frmProperties frmProp;		// Frame xem thông số
 
+	/** The txta progress. */
 	public JTextArea txtaProgress;		
 
+	/** The status. */
 	private int status = 0;				// Biến trạng thái, sử dụng để chọn kiểu paint cho đồ thị
 
 	/*
@@ -87,49 +98,103 @@ public class frmMain {
 	 * algorithmSelect = 1 ==> Prim
 	 * algorithmSelect = 2 ==> Esaus-Williams	
 	 */
+	/** The algorithm select. */
 	private int algorithmSelect = 0;	
-
-	private Font myfont = new Font("Tahoma", Font.PLAIN, 12);   
+	/**
+	 *  font dùng chung cho chương trình.
+	 */
+	private Font myfont = new Font("Tahoma", Font.PLAIN, 12);
+	/**
+	 * Nhấn phím để bắt đầu khởi tạo đồ thị.
+	 */
 	private JButton btnGenerate;
+	/**
+	 * Nhấn phím để bắt đầu chương trình.
+	 */
 	private JButton btnStart;
 
+	/** The chb access network. */
 	private JCheckBox chbAccessNetwork;
 
+	/** The lbl thong so hien thi. */
 	private JLabel lblThongSoHienThi;
+	
+	/** The lbl path. */
 	private JLabel lblPath;
+	
+	/** The lbl alpha. */
 	private JLabel lblAlpha;
+	
+	/** The lbl pc. */
 	private JLabel lblPc;
+	
+	/** The lbl threshold. */
 	private JLabel lblThreshold;
+	
+	/** The lbl rp d. */
 	private JLabel lblRpD;
+	
+	/** The lbl wmax. */
 	private JLabel lblWmax;
 
+	/** The txt n. */
 	private JTextField txtN;
 
+	/** The my graph. */
 	private Graph myGraph;				// Đồ thị chính của chương trình
 
+	/** The number of vertices. */
 	private int numberOfVertices = 50;// Mặc định đồ thị có 50 đỉnh        	
 	/*
 	 * Các tham số chính của chương trình
 	 */
+	/** The alpha. */
 	private double alpha = 0.5; 
+	
+	/** The pc. */
 	private double pc =0.5;
+	
+	/** The w threshold. */
 	private int wThreshold;
+	
+	/** The radius. */
 	private int radius;                       
+	
+	/** The length of graph. */
 	private int lengthOfGraph = 50;
+	
+	/** The w max4 an. */
 	private int wMax4AN;
 
 
+	/** The pnl noidung. */
 	private pnlDisplay pnlNoidung;
-	private JComboBox cbbAlgorithms;
+	
+	/** The cbb algorithms. */
+	private JComboBox<Object> cbbAlgorithms;
+	
+	/** The pnl thamso. */
 	private JPanel pnlThamso;
+	
+	/** The sld threshold. */
 	private JSlider sldThreshold;
+	
+	/** The sld wmax4 an. */
 	private JSlider sldWmax4AN ;
+	
+	/** The txt gamma. */
 	private JTextField txtGamma;
-	private JComboBox cbbFrom;
-	private JComboBox cbbTo;
+	
+	/** The cbb from. */
+	private JComboBox<Object> cbbFrom;
+	
+	/** The cbb to. */
+	private JComboBox<Object> cbbTo;
 
 	/**
 	 * Launch the application.
+	 *
+	 * @param args the arguments
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -192,8 +257,8 @@ public class frmMain {
 		myGraph = new Graph(numberOfVertices);
 		wThreshold = (int)(myGraph.getMinOfWeights()+myGraph.getMaxOfWeights())/2;
 		lengthOfGraph = Collections.max(myGraph.getEdges()).getCost();
-		radius = (int)(0.3*lengthOfGraph);
-		wMax4AN = 3*myGraph.getMaxOfWeights();
+		radius = (int)(0.3 * lengthOfGraph);
+		wMax4AN = 3 * myGraph.getMaxOfWeights();
 
 		txtaProgress.append("* Đang khởi tạo đồ thị mới ...\n");
 		pnlNoidung = new pnlDisplay();
@@ -448,450 +513,450 @@ public class frmMain {
 		pnlThamso.add(sldPc, gbc_sldPc);
 
 		lblWmax = new JLabel("Wmax (for Access network)= "+wMax4AN);
-				GridBagConstraints gbc_lblWmax = new GridBagConstraints();
-				gbc_lblWmax.anchor = GridBagConstraints.NORTHWEST;
-				gbc_lblWmax.insets = new Insets(0, 0, 5, 0);
-				gbc_lblWmax.gridwidth = 2;
-				gbc_lblWmax.gridx = 0;
-				gbc_lblWmax.gridy = 10;
-				pnlThamso.add(lblWmax, gbc_lblWmax);
+		GridBagConstraints gbc_lblWmax = new GridBagConstraints();
+		gbc_lblWmax.anchor = GridBagConstraints.NORTHWEST;
+		gbc_lblWmax.insets = new Insets(0, 0, 5, 0);
+		gbc_lblWmax.gridwidth = 2;
+		gbc_lblWmax.gridx = 0;
+		gbc_lblWmax.gridy = 10;
+		pnlThamso.add(lblWmax, gbc_lblWmax);
 
-				sldWmax4AN = new JSlider(JSlider.HORIZONTAL,(2*wMax),(6*wMax),(3*wMax));
-				sldWmax4AN.addChangeListener(new ChangeListener() {
-					public void stateChanged(ChangeEvent arg0) {
-						JSlider sld = (JSlider)arg0.getSource();
-						if(!sld.getValueIsAdjusting()){
-							int value = sld.getValue();
-							lblWmax.setText("Wmax (for Access network) = "+value);
-									wMax4AN = value;
-									if(status == 3)status =1;
+		sldWmax4AN = new JSlider(JSlider.HORIZONTAL,(2*wMax),(6*wMax),(3*wMax));
+		sldWmax4AN.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent arg0) {
+				JSlider sld = (JSlider)arg0.getSource();
+				if(!sld.getValueIsAdjusting()){
+					int value = sld.getValue();
+					lblWmax.setText("Wmax (for Access network) = "+value);
+					wMax4AN = value;
+					if(status == 3)status =1;
 
-									updateMentorGraph();
-						}
+					updateMentorGraph();
+				}
+			}
+		});
+		sldWmax4AN.setMajorTickSpacing(100);
+		sldWmax4AN.setMinorTickSpacing(25);
+		sldWmax4AN.setPaintTicks(true);
+		GridBagConstraints gbc_sldWmax4AN = new GridBagConstraints();
+		gbc_sldWmax4AN.fill = GridBagConstraints.HORIZONTAL;
+		gbc_sldWmax4AN.anchor = GridBagConstraints.NORTH;
+		gbc_sldWmax4AN.insets = new Insets(0, 0, 5, 0);
+		gbc_sldWmax4AN.gridwidth = 2;
+		gbc_sldWmax4AN.gridx = 0;
+		gbc_sldWmax4AN.gridy = 11;
+		pnlThamso.add(sldWmax4AN, gbc_sldWmax4AN);
+
+		JLabel lblAlgorithmForAN = new JLabel("Algorithm for AN : ");
+		lblAlgorithmForAN.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		GridBagConstraints gbc_lblAlgorithmForAN = new GridBagConstraints();
+		gbc_lblAlgorithmForAN.anchor = GridBagConstraints.NORTHWEST;
+		gbc_lblAlgorithmForAN.insets = new Insets(0, 0, 5, 5);
+		gbc_lblAlgorithmForAN.gridx = 0;
+		gbc_lblAlgorithmForAN.gridy = 12;
+		pnlThamso.add(lblAlgorithmForAN, gbc_lblAlgorithmForAN);
+
+		chbAccessNetwork = new JCheckBox("Hiện Access Network");
+		chbAccessNetwork.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent evt) {
+				int state = evt.getStateChange();
+				if(state == ItemEvent.SELECTED){
+					if((status == 2)||(status == 3)) {
+						status = 1;
+						//updateMentorGraph();
+						pnlNoidung.setPaintOption(1);
+						pnlNoidung.repaint();
+						frmVnetsim.repaint();
 					}
-				});
-				sldWmax4AN.setMajorTickSpacing(100);
-				sldWmax4AN.setMinorTickSpacing(25);
-				sldWmax4AN.setPaintTicks(true);
-				GridBagConstraints gbc_sldWmax4AN = new GridBagConstraints();
-				gbc_sldWmax4AN.fill = GridBagConstraints.HORIZONTAL;
-				gbc_sldWmax4AN.anchor = GridBagConstraints.NORTH;
-				gbc_sldWmax4AN.insets = new Insets(0, 0, 5, 0);
-				gbc_sldWmax4AN.gridwidth = 2;
-				gbc_sldWmax4AN.gridx = 0;
-				gbc_sldWmax4AN.gridy = 11;
-				pnlThamso.add(sldWmax4AN, gbc_sldWmax4AN);
+				}
+				if(state == ItemEvent.DESELECTED){
+					if((status == 1)||(status == 3)) {
+						status = 2;
+						//updateMentorGraph();
+						pnlNoidung.setPaintOption(2);
+						pnlNoidung.repaint();
+						frmVnetsim.repaint();
+					}
+				}
+			}
+		});
+		cbbAlgorithms = new JComboBox<Object>(algorithms);
+		cbbAlgorithms.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent arg0) {
+				algorithmSelect = cbbAlgorithms.getSelectedIndex();
+				if(status!=0)updateMentorGraph();
+			}
+		});
+		cbbAlgorithms.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		cbbAlgorithms.setSelectedIndex(0);
+		GridBagConstraints gbc_cbbAlgorithms = new GridBagConstraints();
+		gbc_cbbAlgorithms.fill = GridBagConstraints.HORIZONTAL;
+		gbc_cbbAlgorithms.anchor = GridBagConstraints.NORTH;
+		gbc_cbbAlgorithms.insets = new Insets(0, 0, 5, 0);
+		gbc_cbbAlgorithms.gridx = 1;
+		gbc_cbbAlgorithms.gridy = 12;
+		pnlThamso.add(cbbAlgorithms, gbc_cbbAlgorithms);
+		chbAccessNetwork.setSelected(true);
+		GridBagConstraints gbc_chbAccessNetwork = new GridBagConstraints();
+		gbc_chbAccessNetwork.anchor = GridBagConstraints.NORTH;
+		gbc_chbAccessNetwork.fill = GridBagConstraints.HORIZONTAL;
+		gbc_chbAccessNetwork.insets = new Insets(0, 0, 5, 0);
+		gbc_chbAccessNetwork.gridwidth = 2;
+		gbc_chbAccessNetwork.gridx = 0;
+		gbc_chbAccessNetwork.gridy = 13;
+		pnlThamso.add(chbAccessNetwork, gbc_chbAccessNetwork);
 
-				JLabel lblAlgorithmForAN = new JLabel("Algorithm for AN : ");
-						lblAlgorithmForAN.setFont(new Font("Tahoma", Font.PLAIN, 12));
-						GridBagConstraints gbc_lblAlgorithmForAN = new GridBagConstraints();
-						gbc_lblAlgorithmForAN.anchor = GridBagConstraints.NORTHWEST;
-						gbc_lblAlgorithmForAN.insets = new Insets(0, 0, 5, 5);
-						gbc_lblAlgorithmForAN.gridx = 0;
-						gbc_lblAlgorithmForAN.gridy = 12;
-						pnlThamso.add(lblAlgorithmForAN, gbc_lblAlgorithmForAN);
+		btnStart = new JButton("Start");
+		btnStart.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				txtaProgress.append("* Đang xây dựng mạng ...");
+				if(chbAccessNetwork.isSelected()) status = 1;
+				else status = 2;
 
-						chbAccessNetwork = new JCheckBox("Hiện Access Network");
-						chbAccessNetwork.addItemListener(new ItemListener() {
-							public void itemStateChanged(ItemEvent evt) {
-								int state = evt.getStateChange();
-								if(state == ItemEvent.SELECTED){
-									if((status == 2)||(status == 3)) {
-										status = 1;
-										//updateMentorGraph();
-										pnlNoidung.setPaintOption(1);
-										pnlNoidung.repaint();
-										frmVnetsim.repaint();
-									}
-								}
-								if(state == ItemEvent.DESELECTED){
-									if((status == 1)||(status == 3)) {
-										status = 2;
-										//updateMentorGraph();
-										pnlNoidung.setPaintOption(2);
-										pnlNoidung.repaint();
-										frmVnetsim.repaint();
-									}
-								}
-							}
-						});
-						cbbAlgorithms = new JComboBox(algorithms);
-						cbbAlgorithms.addItemListener(new ItemListener() {
-							public void itemStateChanged(ItemEvent arg0) {
-								algorithmSelect = cbbAlgorithms.getSelectedIndex();
-								if(status!=0)updateMentorGraph();
-							}
-						});
-						cbbAlgorithms.setFont(new Font("Tahoma", Font.PLAIN, 12));
-						cbbAlgorithms.setSelectedIndex(0);
-						GridBagConstraints gbc_cbbAlgorithms = new GridBagConstraints();
-						gbc_cbbAlgorithms.fill = GridBagConstraints.HORIZONTAL;
-						gbc_cbbAlgorithms.anchor = GridBagConstraints.NORTH;
-						gbc_cbbAlgorithms.insets = new Insets(0, 0, 5, 0);
-						gbc_cbbAlgorithms.gridx = 1;
-						gbc_cbbAlgorithms.gridy = 12;
-						pnlThamso.add(cbbAlgorithms, gbc_cbbAlgorithms);
-						chbAccessNetwork.setSelected(true);
-						GridBagConstraints gbc_chbAccessNetwork = new GridBagConstraints();
-						gbc_chbAccessNetwork.anchor = GridBagConstraints.NORTH;
-						gbc_chbAccessNetwork.fill = GridBagConstraints.HORIZONTAL;
-						gbc_chbAccessNetwork.insets = new Insets(0, 0, 5, 0);
-						gbc_chbAccessNetwork.gridwidth = 2;
-						gbc_chbAccessNetwork.gridx = 0;
-						gbc_chbAccessNetwork.gridy = 13;
-						pnlThamso.add(chbAccessNetwork, gbc_chbAccessNetwork);
+				updateMentorGraph();
+				txtaProgress.append("... Xong.\n");
+			}
+		});
+		GridBagConstraints gbc_btnStart = new GridBagConstraints();
+		gbc_btnStart.fill = GridBagConstraints.VERTICAL;
+		gbc_btnStart.gridheight = 2;
+		gbc_btnStart.insets = new Insets(0, 0, 5, 0);
+		gbc_btnStart.gridwidth = 2;
+		gbc_btnStart.gridx = 0;
+		gbc_btnStart.gridy = 14;
+		pnlThamso.add(btnStart, gbc_btnStart);
+		GridBagLayout gbl_pnlRoute = new GridBagLayout();
+		gbl_pnlRoute.columnWidths = new int[]{47, 1, 0};
+		gbl_pnlRoute.rowHeights = new int[]{26, 28, 28, 0};
+		gbl_pnlRoute.columnWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
+		gbl_pnlRoute.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
+		pnlRoute.setLayout(gbl_pnlRoute);
 
-						btnStart = new JButton("Start");
-						btnStart.addActionListener(new ActionListener() {
-							public void actionPerformed(ActionEvent arg0) {
-								txtaProgress.append("* Đang xây dựng mạng ...");
-								if(chbAccessNetwork.isSelected()) status = 1;
-								else status = 2;
+		JLabel lblFrom = new JLabel("Từ nút :");
+		GridBagConstraints gbc_lblFrom = new GridBagConstraints();
+		gbc_lblFrom.insets = new Insets(0, 0, 5, 5);
+		gbc_lblFrom.gridx = 0;
+		gbc_lblFrom.gridy = 0;
+		pnlRoute.add(lblFrom, gbc_lblFrom);
 
-								updateMentorGraph();
-								txtaProgress.append("... Xong.\n");
-							}
-						});
-						GridBagConstraints gbc_btnStart = new GridBagConstraints();
-						gbc_btnStart.fill = GridBagConstraints.VERTICAL;
-						gbc_btnStart.gridheight = 2;
-						gbc_btnStart.insets = new Insets(0, 0, 5, 0);
-						gbc_btnStart.gridwidth = 2;
-						gbc_btnStart.gridx = 0;
-						gbc_btnStart.gridy = 14;
-						pnlThamso.add(btnStart, gbc_btnStart);
-						GridBagLayout gbl_pnlRoute = new GridBagLayout();
-						gbl_pnlRoute.columnWidths = new int[]{47, 1, 0};
-						gbl_pnlRoute.rowHeights = new int[]{26, 28, 28, 0};
-						gbl_pnlRoute.columnWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
-						gbl_pnlRoute.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
-						pnlRoute.setLayout(gbl_pnlRoute);
+		cbbFrom = new JComboBox<Object>(cbbVertices);
+		cbbFrom.setEditable(false);
+		GridBagConstraints gbc_cbbFrom = new GridBagConstraints();
+		gbc_cbbFrom.fill = GridBagConstraints.HORIZONTAL;
+		gbc_cbbFrom.anchor = GridBagConstraints.NORTH;
+		gbc_cbbFrom.insets = new Insets(0, 0, 5, 0);
+		gbc_cbbFrom.gridx = 1;
+		gbc_cbbFrom.gridy = 0;
+		pnlRoute.add(cbbFrom, gbc_cbbFrom);
 
-						JLabel lblFrom = new JLabel("Từ nút :");
-						GridBagConstraints gbc_lblFrom = new GridBagConstraints();
-						gbc_lblFrom.insets = new Insets(0, 0, 5, 5);
-						gbc_lblFrom.gridx = 0;
-						gbc_lblFrom.gridy = 0;
-						pnlRoute.add(lblFrom, gbc_lblFrom);
+		JLabel lblTo = new JLabel("Tới nút :");
+		GridBagConstraints gbc_lblTo = new GridBagConstraints();
+		gbc_lblTo.insets = new Insets(0, 0, 5, 5);
+		gbc_lblTo.gridx = 0;
+		gbc_lblTo.gridy = 1;
+		pnlRoute.add(lblTo, gbc_lblTo);
 
-						cbbFrom = new JComboBox(cbbVertices);
-						cbbFrom.setEditable(false);
-						GridBagConstraints gbc_cbbFrom = new GridBagConstraints();
-						gbc_cbbFrom.fill = GridBagConstraints.HORIZONTAL;
-						gbc_cbbFrom.anchor = GridBagConstraints.NORTH;
-						gbc_cbbFrom.insets = new Insets(0, 0, 5, 0);
-						gbc_cbbFrom.gridx = 1;
-						gbc_cbbFrom.gridy = 0;
-						pnlRoute.add(cbbFrom, gbc_cbbFrom);
+		JButton btnGo = new JButton("Go!");
+		btnGo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(status == 0) JOptionPane.showMessageDialog(frmVnetsim, "Mạng chưa tối ưu !\nKhông thể tìm thấy đường đi");
+				else {
+					status = 3;
+					Vertex fromNode = (Vertex)cbbFrom.getSelectedItem();
+					Vertex toNode = (Vertex)cbbTo.getSelectedItem();
+					txtaProgress.append("* Tìm đường đi từ nút "+fromNode.getId()+" tới nút "+toNode.getId()+"\n");
 
-						JLabel lblTo = new JLabel("Tới nút :");
-						GridBagConstraints gbc_lblTo = new GridBagConstraints();
-						gbc_lblTo.insets = new Insets(0, 0, 5, 5);
-						gbc_lblTo.gridx = 0;
-						gbc_lblTo.gridy = 1;
-						pnlRoute.add(lblTo, gbc_lblTo);
+					if(fromNode.equals(toNode)){
+						JOptionPane.showMessageDialog(frmVnetsim, "Hai đỉnh giống nhau !");
+						txtaProgress.append("* Tìm đường thất bại !\n");
+					}
+					else {						
+						List<Vertex> path = getPath(fromNode,toNode,myGraph);
+						txtaProgress.append("* Đang xây dựng đường đi ...\n");
+						StringBuilder sPath = new StringBuilder("Đường đi = ");
+						for(Vertex node : path){
+							sPath.append(node.getId());
+							if(!node.equals(toNode))sPath.append("-->");
+						}
+						clearPath(myGraph);
+						for(int i =0; i< path.size()-1;i++){
+							Vertex msource = path.get(i);
+							Vertex mtarget = path.get(i+1);
+							Edge mE = myGraph.getEdge(msource, mtarget);
+							mE.setPath(true);
+							//System.out.println(mE+ " is path !");
+						}
+						//updateMentorGraph();
+						pnlNoidung.setPaintOption(3);
+						pnlNoidung.repaint();
+						frmVnetsim.repaint();
 
-						JButton btnGo = new JButton("Go!");
-						btnGo.addActionListener(new ActionListener() {
-							public void actionPerformed(ActionEvent arg0) {
-								if(status == 0) JOptionPane.showMessageDialog(frmVnetsim, "Mạng chưa tối ưu !\nKhông thể tìm thấy đường đi");
-								else {
-									status = 3;
-									Vertex fromNode = (Vertex)cbbFrom.getSelectedItem();
-									Vertex toNode = (Vertex)cbbTo.getSelectedItem();
-									txtaProgress.append("* Tìm đường đi từ nút "+fromNode.getId()+" tới nút "+toNode.getId()+"\n");
-
-									if(fromNode.equals(toNode)){
-										JOptionPane.showMessageDialog(frmVnetsim, "Hai đỉnh giống nhau !");
-										txtaProgress.append("* Tìm đường thất bại !\n");
-									}
-									else {						
-										List<Vertex> path = getPath(fromNode,toNode,myGraph);
-										txtaProgress.append("* Đang xây dựng đường đi ...\n");
-										StringBuilder sPath = new StringBuilder("Đường đi = ");
-										for(Vertex node : path){
-											sPath.append(node.getId());
-											if(!node.equals(toNode))sPath.append("-->");
-										}
-										clearPath(myGraph);
-										for(int i =0; i< path.size()-1;i++){
-											Vertex msource = path.get(i);
-											Vertex mtarget = path.get(i+1);
-											Edge mE = myGraph.getEdge(msource, mtarget);
-											mE.setPath(true);
-											//System.out.println(mE+ " is path !");
-										}
-										//updateMentorGraph();
-										pnlNoidung.setPaintOption(3);
-										pnlNoidung.repaint();
-										frmVnetsim.repaint();
-
-										lblPath.setFont(myfont);
-										lblPath.setText(sPath.toString());
-										txtaProgress.append("* Đã tìm thấy đường đi từ nút "+fromNode.getId()+" tới nút "+toNode.getId()+"\n");
-										txtaProgress.append("* "+sPath.toString()+"\n");
-										frmVnetsim.repaint();
-									}
-								}
-							}
-						});
-						cbbTo = new JComboBox(cbbVertices);
-						cbbTo.setSelectedIndex(cbbVertices.length-1);
-						cbbTo.setEditable(false);
-						GridBagConstraints gbc_cbbTo = new GridBagConstraints();
-						gbc_cbbTo.fill = GridBagConstraints.HORIZONTAL;
-						gbc_cbbTo.anchor = GridBagConstraints.NORTH;
-						gbc_cbbTo.insets = new Insets(0, 0, 5, 0);
-						gbc_cbbTo.gridx = 1;
-						gbc_cbbTo.gridy = 1;
-						pnlRoute.add(cbbTo, gbc_cbbTo);
-						GridBagConstraints gbc_btnGo = new GridBagConstraints();
-						gbc_btnGo.fill = GridBagConstraints.HORIZONTAL;
-						gbc_btnGo.anchor = GridBagConstraints.NORTH;
-						gbc_btnGo.gridx = 0;
-						gbc_btnGo.gridy = 2;
-						pnlRoute.add(btnGo, gbc_btnGo);
+						lblPath.setFont(myfont);
+						lblPath.setText(sPath.toString());
+						txtaProgress.append("* Đã tìm thấy đường đi từ nút "+fromNode.getId()+" tới nút "+toNode.getId()+"\n");
+						txtaProgress.append("* "+sPath.toString()+"\n");
+						frmVnetsim.repaint();
+					}
+				}
+			}
+		});
+		cbbTo = new JComboBox<Object>(cbbVertices);
+		cbbTo.setSelectedIndex(cbbVertices.length-1);
+		cbbTo.setEditable(false);
+		GridBagConstraints gbc_cbbTo = new GridBagConstraints();
+		gbc_cbbTo.fill = GridBagConstraints.HORIZONTAL;
+		gbc_cbbTo.anchor = GridBagConstraints.NORTH;
+		gbc_cbbTo.insets = new Insets(0, 0, 5, 0);
+		gbc_cbbTo.gridx = 1;
+		gbc_cbbTo.gridy = 1;
+		pnlRoute.add(cbbTo, gbc_cbbTo);
+		GridBagConstraints gbc_btnGo = new GridBagConstraints();
+		gbc_btnGo.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnGo.anchor = GridBagConstraints.NORTH;
+		gbc_btnGo.gridx = 0;
+		gbc_btnGo.gridy = 2;
+		pnlRoute.add(btnGo, gbc_btnGo);
 
 
-						JPanel pnlOverload = new JPanel();
-						tbdpnThem.addTab("Quá tải", null, pnlOverload, null);
-						GridBagLayout gbl_pnlOverload = new GridBagLayout();
-						gbl_pnlOverload.columnWidths = new int[]{58, 25, 18, 0};
-						gbl_pnlOverload.rowHeights = new int[]{28, 28, 0};
-						gbl_pnlOverload.columnWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
-						gbl_pnlOverload.rowWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
-						pnlOverload.setLayout(gbl_pnlOverload);
+		JPanel pnlOverload = new JPanel();
+		tbdpnThem.addTab("Quá tải", null, pnlOverload, null);
+		GridBagLayout gbl_pnlOverload = new GridBagLayout();
+		gbl_pnlOverload.columnWidths = new int[]{58, 25, 18, 0};
+		gbl_pnlOverload.rowHeights = new int[]{28, 28, 0};
+		gbl_pnlOverload.columnWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_pnlOverload.rowWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
+		pnlOverload.setLayout(gbl_pnlOverload);
 
-						JLabel lblGamma = new JLabel("Gamma = ");
-						GridBagConstraints gbc_lblGamma = new GridBagConstraints();
-						gbc_lblGamma.insets = new Insets(0, 0, 5, 5);
-						gbc_lblGamma.gridx = 0;
-						gbc_lblGamma.gridy = 0;
-						pnlOverload.add(lblGamma, gbc_lblGamma);
+		JLabel lblGamma = new JLabel("Gamma = ");
+		GridBagConstraints gbc_lblGamma = new GridBagConstraints();
+		gbc_lblGamma.insets = new Insets(0, 0, 5, 5);
+		gbc_lblGamma.gridx = 0;
+		gbc_lblGamma.gridy = 0;
+		pnlOverload.add(lblGamma, gbc_lblGamma);
 
-						txtGamma = new JTextField();
-						txtGamma.setEditable(false);
-						txtGamma.setText("80");
-						txtGamma.setColumns(10);
-						GridBagConstraints gbc_txtGamma = new GridBagConstraints();
-						gbc_txtGamma.fill = GridBagConstraints.HORIZONTAL;
-						gbc_txtGamma.anchor = GridBagConstraints.NORTH;
-						gbc_txtGamma.insets = new Insets(0, 0, 5, 5);
-						gbc_txtGamma.gridx = 1;
-						gbc_txtGamma.gridy = 0;
-						pnlOverload.add(txtGamma, gbc_txtGamma);
+		txtGamma = new JTextField();
+		txtGamma.setEditable(false);
+		txtGamma.setText("80");
+		txtGamma.setColumns(10);
+		GridBagConstraints gbc_txtGamma = new GridBagConstraints();
+		gbc_txtGamma.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtGamma.anchor = GridBagConstraints.NORTH;
+		gbc_txtGamma.insets = new Insets(0, 0, 5, 5);
+		gbc_txtGamma.gridx = 1;
+		gbc_txtGamma.gridy = 0;
+		pnlOverload.add(txtGamma, gbc_txtGamma);
 
-						JLabel label = new JLabel("%");
-						GridBagConstraints gbc_label = new GridBagConstraints();
-						gbc_label.fill = GridBagConstraints.HORIZONTAL;
-						gbc_label.insets = new Insets(0, 0, 5, 0);
-						gbc_label.gridx = 2;
-						gbc_label.gridy = 0;
-						pnlOverload.add(label, gbc_label);
+		JLabel label = new JLabel("%");
+		GridBagConstraints gbc_label = new GridBagConstraints();
+		gbc_label.fill = GridBagConstraints.HORIZONTAL;
+		gbc_label.insets = new Insets(0, 0, 5, 0);
+		gbc_label.gridx = 2;
+		gbc_label.gridy = 0;
+		pnlOverload.add(label, gbc_label);
 
-						JButton btnAdd = new JButton("Add");
-						btnAdd.setEnabled(false);
-						GridBagConstraints gbc_btnAdd = new GridBagConstraints();
-						gbc_btnAdd.fill = GridBagConstraints.HORIZONTAL;
-						gbc_btnAdd.anchor = GridBagConstraints.NORTH;
-						gbc_btnAdd.insets = new Insets(0, 0, 0, 5);
-						gbc_btnAdd.gridx = 0;
-						gbc_btnAdd.gridy = 1;
-						pnlOverload.add(btnAdd, gbc_btnAdd);
-						GridBagConstraints gbc_tbdpnThem = new GridBagConstraints();
-						gbc_tbdpnThem.fill = GridBagConstraints.BOTH;
-						gbc_tbdpnThem.gridwidth = 2;
-						gbc_tbdpnThem.gridx = 0;
-						gbc_tbdpnThem.gridy = 16;
-						pnlThamso.add(tbdpnThem, gbc_tbdpnThem);
+		JButton btnAdd = new JButton("Add");
+		btnAdd.setEnabled(false);
+		GridBagConstraints gbc_btnAdd = new GridBagConstraints();
+		gbc_btnAdd.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnAdd.anchor = GridBagConstraints.NORTH;
+		gbc_btnAdd.insets = new Insets(0, 0, 0, 5);
+		gbc_btnAdd.gridx = 0;
+		gbc_btnAdd.gridy = 1;
+		pnlOverload.add(btnAdd, gbc_btnAdd);
+		GridBagConstraints gbc_tbdpnThem = new GridBagConstraints();
+		gbc_tbdpnThem.fill = GridBagConstraints.BOTH;
+		gbc_tbdpnThem.gridwidth = 2;
+		gbc_tbdpnThem.gridx = 0;
+		gbc_tbdpnThem.gridy = 16;
+		pnlThamso.add(tbdpnThem, gbc_tbdpnThem);
 
 
-						JMenuBar menuBar = new JMenuBar();
-						frmVnetsim.setJMenuBar(menuBar);
+		JMenuBar menuBar = new JMenuBar();
+		frmVnetsim.setJMenuBar(menuBar);
 
-						JMenu mnFile = new JMenu("File");
-						mnFile.setMnemonic(KeyEvent.VK_F);
-						mnFile.setFont(new Font("Tahoma", Font.PLAIN, 12));
-						menuBar.add(mnFile);
+		JMenu mnFile = new JMenu("File");
+		mnFile.setMnemonic(KeyEvent.VK_F);
+		mnFile.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		menuBar.add(mnFile);
 
-						JMenuItem mntmNew = new JMenuItem("New",KeyEvent.VK_N);
-						mntmNew.setEnabled(false);
-						mntmNew.setFont(new Font("Tahoma", Font.PLAIN, 12));
-						mnFile.add(mntmNew);
+		JMenuItem mntmNew = new JMenuItem("New", KeyEvent.VK_N);
+		mntmNew.setEnabled(false);
+		mntmNew.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		mnFile.add(mntmNew);
 
-						JMenuItem mntmOpen = new JMenuItem("Open",KeyEvent.VK_O);
-						mntmOpen.setEnabled(false);
-						mntmOpen.setFont(new Font("Tahoma", Font.PLAIN, 12));
-						mnFile.add(mntmOpen);
+		JMenuItem mntmOpen = new JMenuItem("Open", KeyEvent.VK_O);
+		mntmOpen.setEnabled(false);
+		mntmOpen.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		mnFile.add(mntmOpen);
 
-						JSeparator separator_2 = new JSeparator();
-						mnFile.add(separator_2);
+		JSeparator separator_2 = new JSeparator();
+		mnFile.add(separator_2);
 
-						JMenuItem mntmSave = new JMenuItem("Save");
-						mntmSave.setEnabled(false);
-						mntmSave.setFont(new Font("Tahoma", Font.PLAIN, 12));
-						mnFile.add(mntmSave);
+		JMenuItem mntmSave = new JMenuItem("Save");
+		mntmSave.setEnabled(false);
+		mntmSave.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		mnFile.add(mntmSave);
 
-						JMenuItem mntmSaveAs = new JMenuItem("Save As");
-						mntmSaveAs.setEnabled(false);
-						mntmSaveAs.setFont(new Font("Tahoma", Font.PLAIN, 12));
-						mnFile.add(mntmSaveAs);
+		JMenuItem mntmSaveAs = new JMenuItem("Save As");
+		mntmSaveAs.setEnabled(false);
+		mntmSaveAs.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		mnFile.add(mntmSaveAs);
 
-						JSeparator separator_1 = new JSeparator();
-						mnFile.add(separator_1);
+		JSeparator separator_1 = new JSeparator();
+		mnFile.add(separator_1);
 
-						JMenuItem mntmExit = new JMenuItem("Exit",KeyEvent.VK_E);
-						mntmExit.setIcon(new ImageIcon(frmMain.class.getResource("/VnetsimIcons/iconExit.png")));
-						mntmExit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0));
-						mntmExit.addActionListener(new ActionListener() {
-							public void actionPerformed(ActionEvent arg0) {
-								System.exit(0);
-							}
-						});
-						mntmExit.setFont(new Font("Tahoma", Font.PLAIN, 12));
-						mnFile.add(mntmExit);
+		JMenuItem mntmExit = new JMenuItem("Exit",KeyEvent.VK_E);
+		mntmExit.setIcon(new ImageIcon(frmMain.class.getResource("/VnetsimIcons/iconExit.png")));
+		mntmExit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0));
+		mntmExit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				System.exit(0);
+			}
+		});
+		mntmExit.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		mnFile.add(mntmExit);
 
-						JMenu mnViews = new JMenu("Views");
-						mnViews.setMnemonic(KeyEvent.VK_V);
-						mnViews.setFont(new Font("Tahoma", Font.PLAIN, 12));
-						menuBar.add(mnViews);
+		JMenu mnViews = new JMenu("Views");
+		mnViews.setMnemonic(KeyEvent.VK_V);
+		mnViews.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		menuBar.add(mnViews);
 
-						JMenuItem mntmMatTraffic = new JMenuItem("Traffics",KeyEvent.VK_T);
-						mntmMatTraffic.setIcon(new ImageIcon(frmMain.class.getResource("/VnetsimIcons/iconTraffic.png")));
-						mntmMatTraffic.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F5, 0));
-						mntmMatTraffic.addActionListener(new ActionListener() {
-							public void actionPerformed(ActionEvent arg0) {
-								frmTraffics matW = new frmTraffics(myGraph);
-								matW.setVisible(true);
-							}
-						});
+		JMenuItem mntmMatTraffic = new JMenuItem("Traffics",KeyEvent.VK_T);
+		mntmMatTraffic.setIcon(new ImageIcon(frmMain.class.getResource("/VnetsimIcons/iconTraffic.png")));
+		mntmMatTraffic.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F5, 0));
+		mntmMatTraffic.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				frmTraffics matW = new frmTraffics(myGraph);
+				matW.setVisible(true);
+			}
+		});
 
-						JCheckBoxMenuItem chbmLog = new JCheckBoxMenuItem("Log");
-						chbmLog.setIcon(new ImageIcon(frmMain.class.getResource("/VnetsimIcons/iconLog.png")));
-						chbmLog.addItemListener(new ItemListener() {
-							public void itemStateChanged(ItemEvent evt) {
-								int state = evt.getStateChange();
-								if(state == ItemEvent.SELECTED){
-									frmProgress.setVisible(true);
-								}
-								if(state == ItemEvent.DESELECTED){
-									frmProgress.setVisible(false);
-								}
-							}
-						});
-						chbmLog.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F4, 0));
-						chbmLog.setFont(new Font("Tahoma", Font.PLAIN, 12));
-						chbmLog.setSelected(true);
-						mnViews.add(chbmLog);
-						mntmMatTraffic.setFont(new Font("Tahoma", Font.PLAIN, 12));
-						mnViews.add(mntmMatTraffic);
+		JCheckBoxMenuItem chbmLog = new JCheckBoxMenuItem("Log");
+		chbmLog.setIcon(new ImageIcon(frmMain.class.getResource("/VnetsimIcons/iconLog.png")));
+		chbmLog.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent evt) {
+				int state = evt.getStateChange();
+				if(state == ItemEvent.SELECTED){
+					frmProgress.setVisible(true);
+				}
+				if(state == ItemEvent.DESELECTED){
+					frmProgress.setVisible(false);
+				}
+			}
+		});
+		chbmLog.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F4, 0));
+		chbmLog.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		chbmLog.setSelected(true);
+		mnViews.add(chbmLog);
+		mntmMatTraffic.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		mnViews.add(mntmMatTraffic);
 
-						JMenuItem mntmCosts = new JMenuItem("Costs",KeyEvent.VK_C);
-						mntmCosts.setIcon(new ImageIcon(frmMain.class.getResource("/VnetsimIcons/iconCost.png")));
-						mntmCosts.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F6, 0));
-						mntmCosts.addActionListener(new ActionListener() {
-							public void actionPerformed(ActionEvent arg0) {
-								frmCosts matC = new frmCosts(myGraph);
-								matC.setVisible(true);
-							}
-						});
-						mntmCosts.setFont(new Font("Tahoma", Font.PLAIN, 12));
-						mnViews.add(mntmCosts);
+		JMenuItem mntmCosts = new JMenuItem("Costs",KeyEvent.VK_C);
+		mntmCosts.setIcon(new ImageIcon(frmMain.class.getResource("/VnetsimIcons/iconCost.png")));
+		mntmCosts.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F6, 0));
+		mntmCosts.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				frmCosts matC = new frmCosts(myGraph);
+				matC.setVisible(true);
+			}
+		});
+		mntmCosts.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		mnViews.add(mntmCosts);
 
-						JMenuItem mntmProperties = new JMenuItem("Properties");
-						mntmProperties.setIcon(new ImageIcon(frmMain.class.getResource("/VnetsimIcons/iconProperties.png")));
-						mntmProperties.addActionListener(new ActionListener() {
-							public void actionPerformed(ActionEvent arg0) {				
-								frmProp = new frmProperties(myGraph);
-								frmProp.setVisible(true);			
+		JMenuItem mntmProperties = new JMenuItem("Properties");
+		mntmProperties.setIcon(new ImageIcon(frmMain.class.getResource("/VnetsimIcons/iconProperties.png")));
+		mntmProperties.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {				
+				frmProp = new frmProperties(myGraph);
+				frmProp.setVisible(true);			
 
-							}
-						});
-						mntmProperties.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F7, 0));
-						mnViews.add(mntmProperties);
+			}
+		});
+		mntmProperties.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F7, 0));
+		mnViews.add(mntmProperties);
 
-						JSeparator separator_7 = new JSeparator();
-						mnViews.add(separator_7);
+		JSeparator separator_7 = new JSeparator();
+		mnViews.add(separator_7);
 
-						JMenuItem mntmChangeLaf = new JMenuItem("Change LAF");
-						mntmChangeLaf.setIcon(new ImageIcon(frmMain.class.getResource("/VnetsimIcons/iconChangeLAF.png")));
-						mntmChangeLaf.addActionListener(new ActionListener() {
-							public void actionPerformed(ActionEvent arg0) {
-								Object[] optionLAF = {"Nimbus","Metal","CDE/Motif","Windows","Windows Classic"};
-								int item = JOptionPane.showOptionDialog(null,
-										"Hãy lựa chọn giao diện chương trình ?",
-										"Change Look and Feel",
-										0,
-										JOptionPane.QUESTION_MESSAGE,
-										null,
-										optionLAF ,
-										"Metal");
-								if(item == 0)changeLafTo("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
-								if(item == 1)changeLafTo("javax.swing.plaf.metal.MetalLookAndFeel");
-								if(item == 2)changeLafTo("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
-								if(item == 3)changeLafTo("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-								if(item == 4)changeLafTo("com.sun.java.swing.plaf.windows.WindowsClassicLookAndFeel");
+		JMenuItem mntmChangeLaf = new JMenuItem("Change LAF");
+		mntmChangeLaf.setIcon(new ImageIcon(frmMain.class.getResource("/VnetsimIcons/iconChangeLAF.png")));
+		mntmChangeLaf.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Object[] optionLAF = {"Nimbus","Metal","CDE/Motif","Windows","Windows Classic"};
+				int item = JOptionPane.showOptionDialog(null,
+						"Hãy lựa chọn giao diện chương trình ?",
+						"Change Look and Feel",
+						0,
+						JOptionPane.QUESTION_MESSAGE,
+						null,
+						optionLAF ,
+						"Metal");
+				if(item == 0)changeLafTo("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
+				if(item == 1)changeLafTo("javax.swing.plaf.metal.MetalLookAndFeel");
+				if(item == 2)changeLafTo("com.sun.java.swing.plaf.motif.MotifLookAndFeel");
+				if(item == 3)changeLafTo("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+				if(item == 4)changeLafTo("com.sun.java.swing.plaf.windows.WindowsClassicLookAndFeel");
 
-								txtaProgress.append("* Thay đổi Look and Feel ... Xong.\n");
+				txtaProgress.append("* Thay đổi Look and Feel ... Xong.\n");
 
-							}
-						});
-						mntmChangeLaf.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F8, 0));
-						mntmChangeLaf.setFont(new Font("Tahoma", Font.PLAIN, 12));
-						mnViews.add(mntmChangeLaf);
+			}
+		});
+		mntmChangeLaf.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F8, 0));
+		mntmChangeLaf.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		mnViews.add(mntmChangeLaf);
 
-						JMenu mnHelp = new JMenu("Help");
-						mnHelp.setMnemonic(KeyEvent.VK_H);
-						mnHelp.setFont(new Font("Tahoma", Font.PLAIN, 12));
-						menuBar.add(mnHelp);
+		JMenu mnHelp = new JMenu("Help");
+		mnHelp.setMnemonic(KeyEvent.VK_H);
+		mnHelp.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		menuBar.add(mnHelp);
 
-						JMenuItem mntmHelpContents = new JMenuItem("Help Contents");
-						mntmHelpContents.addActionListener(new ActionListener() {
-							public void actionPerformed(ActionEvent arg0) {
-								try{
-									//Runtime.getRuntime().exec("hh.exe myhelpfile.chm");
-									Desktop.getDesktop().open( new File("E:/Practice/Java Project/eclipse workspace/Vnetsim/bin/myhelpfile.chm"));
-								}
-								catch (Exception e){
-									JOptionPane.showMessageDialog(null, "Lỗi");
-								}
-							}
-						});
-						mntmHelpContents.setIcon(new ImageIcon(frmMain.class.getResource("/VnetsimIcons/iconHelpContents.png")));
-						mntmHelpContents.setFont(new Font("Tahoma", Font.PLAIN, 12));
-						mnHelp.add(mntmHelpContents);
+		JMenuItem mntmHelpContents = new JMenuItem("Help Contents");
+		mntmHelpContents.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try{
+					//Runtime.getRuntime().exec("hh.exe myhelpfile.chm");
+					Desktop.getDesktop().open( new File("E:/Practice/Java Project/eclipse workspace/Vnetsim/bin/myhelpfile.chm"));
+				}
+				catch (Exception e){
+					JOptionPane.showMessageDialog(null, "Lỗi");
+				}
+			}
+		});
+		mntmHelpContents.setIcon(new ImageIcon(frmMain.class.getResource("/VnetsimIcons/iconHelpContents.png")));
+		mntmHelpContents.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		mnHelp.add(mntmHelpContents);
 
-						JMenuItem mntmRegister = new JMenuItem("Register");
-						mntmRegister.setIcon(new ImageIcon(frmMain.class.getResource("/VnetsimIcons/iconRegister.png")));
-						mntmRegister.setEnabled(false);
-						mntmRegister.setFont(new Font("Tahoma", Font.BOLD, 12));
-						mnHelp.add(mntmRegister);
+		JMenuItem mntmRegister = new JMenuItem("Register");
+		mntmRegister.setIcon(new ImageIcon(frmMain.class.getResource("/VnetsimIcons/iconRegister.png")));
+		mntmRegister.setEnabled(false);
+		mntmRegister.setFont(new Font("Tahoma", Font.BOLD, 12));
+		mnHelp.add(mntmRegister);
 
-						JSeparator separator = new JSeparator();
-						mnHelp.add(separator);
+		JSeparator separator = new JSeparator();
+		mnHelp.add(separator);
 
-						JMenuItem mntmAboutUs = new JMenuItem("About us",KeyEvent.VK_A);
-						mntmAboutUs.setIcon(new ImageIcon(frmMain.class.getResource("/VnetsimIcons/iconAboutUs.png")));
-						mntmAboutUs.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F12, 0));
-						mntmAboutUs.setFont(myfont);
-						mntmAboutUs.addActionListener(new ActionListener() {
-							public void actionPerformed(ActionEvent arg0) {
-								String mess = "Vnetsim\nversion 11.04"
-										+"\nPhần mềm mô phỏng topology mạng phân tán"
-										+"\n© Copyright 2011 VnetSim project"
-										+"\n http://vcorp.com/VnetSim\n"
-										+ "\nTrial 365 days\nVũ Thành Công"
-										+"\nvuthanhcong.ict@gmail.com"
-										+"\nĐT2 - K52"
-										+"\nSchool of Electronics and Telecommunication"
-										+"\nHanoi University of Science and Technology";
-								JOptionPane.showMessageDialog(null,
-										mess,
-										"About us",
-										JOptionPane.INFORMATION_MESSAGE );
-							}
-						});
-						mnHelp.add(mntmAboutUs);	
+		JMenuItem mntmAboutUs = new JMenuItem("About us",KeyEvent.VK_A);
+		mntmAboutUs.setIcon(new ImageIcon(frmMain.class.getResource("/VnetsimIcons/iconAboutUs.png")));
+		mntmAboutUs.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F12, 0));
+		mntmAboutUs.setFont(myfont);
+		mntmAboutUs.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String mess = "Vnetsim\nversion 11.04"
+						+"\nPhần mềm mô phỏng topology mạng phân tán"
+						+"\n© Copyright 2011 VnetSim project"
+						+"\n http://vcorp.com/VnetSim\n"
+						+ "\nTrial 365 days\nVũ Thành Công"
+						+"\nvuthanhcong.ict@gmail.com"
+						+"\nĐT2 - K52"
+						+"\nSchool of Electronics and Telecommunication"
+						+"\nHanoi University of Science and Technology";
+				JOptionPane.showMessageDialog(null,
+						mess,
+						"About us",
+						JOptionPane.INFORMATION_MESSAGE );
+			}
+		});
+		mnHelp.add(mntmAboutUs);	
 
 
 
@@ -902,6 +967,11 @@ public class frmMain {
 	/*
 	 * Phương thức xóa các đường đi đã tìm cũ
 	 */
+	/**
+	 * Clear path.
+	 *
+	 * @param myGr the my gr
+	 */
 	private void clearPath(Graph myGr) {
 		for(Edge ed :myGr.getEdges()){
 			ed.setPath(false);
@@ -911,7 +981,12 @@ public class frmMain {
 	/*
 	 * Phương thức update combobox khi đồ thị thay đổi
 	 */
-	private void updateCombobox(JComboBox cbb) {
+	/**
+	 * Update combobox.
+	 *
+	 * @param cbb the cbb
+	 */
+	private void updateCombobox(JComboBox<Object> cbb) {
 		Object[] cbbVertices = myGraph.getVertices().toArray();
 		cbb.removeAllItems();
 		for(Object node :cbbVertices){
@@ -926,6 +1001,14 @@ public class frmMain {
 	 * Phương thức lấy đường đi giữa 2 nút
 	 * Thuật toán : lấy liên tiếp các nút parent cho tới khi nút parent trùng nhau thì dừng và 
 	 * xử lý các danh sách sinh ra
+	 */
+	/**
+	 * Gets the path.
+	 *
+	 * @param fromNode the from node
+	 * @param toNode the to node
+	 * @param mGr the m gr
+	 * @return the path
 	 */
 	private List<Vertex> getPath(Vertex fromNode, Vertex toNode,Graph mGr) {
 		List<Vertex> path = new ArrayList<Vertex>();
@@ -976,11 +1059,19 @@ public class frmMain {
 		return path;
 	}
 
+	/**
+	 * Gets the graph.
+	 *
+	 * @return the graph
+	 */
 	public Graph getGraph(){
 		return this.myGraph;
 	}
 	/*
 	 * Dùng để update trạng thái của đồ thị khi các thông số thay đổi tức thì
+	 */
+	/**
+	 * Update mentor graph.
 	 */
 	private void updateMentorGraph(){
 		if(frmProp!=null)frmProp.dispose();
@@ -1014,6 +1105,9 @@ public class frmMain {
 	/*
 	 * Phương thức cập nhật các nhãn
 	 */
+	/**
+	 * Update thong so hien thi.
+	 */
 	private void updateThongSoHienThi(){
 		int length = 0;
 		for(Edge eg : myGraph.getEdges()){
@@ -1028,7 +1122,10 @@ public class frmMain {
 	/*
 	 * Dùng để cập nhật trạng thái của slider khi khởi tạo đồ thị mới
 	 */
-	private void updateSlider(){
+	/**
+	 * Update slider.
+	 */
+	private void updateSlider() {
 
 		int max = myGraph.getMaxOfWeights();
 		int min = myGraph.getMinOfWeights();
@@ -1043,15 +1140,20 @@ public class frmMain {
 	/*
 	 * Dùng để thay đổi Look and Feel
 	 */
-	private void changeLafTo( String cName ) {
+	/**
+	 * Change laf to.
+	 *
+	 * @param cName the c name
+	 */
+	private void changeLafTo(String cName) {
 		try {
-			UIManager.setLookAndFeel( cName );
-		}
+			UIManager.setLookAndFeel(cName);
+			}
 		catch( Exception e ) {
 			JOptionPane.showMessageDialog(null, "Đã có lỗi xảy ra !\nKhông thể thay đổi Look and Feel");
-		}
+			}
 		SwingUtilities.updateComponentTreeUI( this.frmVnetsim );
 		SwingUtilities.updateComponentTreeUI( this.frmProgress );
 		if(frmProp!=null)SwingUtilities.updateComponentTreeUI( this.frmProp );
-	}
+			}
 }
