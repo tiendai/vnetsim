@@ -9,12 +9,13 @@
  *
  * @version 2.1 2011/11/27 
  */
-package ui;
+package com.bkhn.ltnc.vnetsim.ui;
 import java.awt.*;
 import java.awt.geom.*;
 import javax.swing.*;
 
-import myobjects.*;
+import com.bkhn.ltnc.vnetsim.myobjects.*;
+
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;

@@ -9,7 +9,7 @@
  *
  * @version 2.0 2011/11/27 
  */
-package ui;
+package com.bkhn.ltnc.vnetsim.ui;
 
 import java.awt.EventQueue;
 
@@ -47,10 +47,6 @@ import java.awt.event.KeyEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
 
-import myobjects.Edge;
-import myobjects.Graph;
-import myobjects.Vertex;
-import algorithms.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -63,6 +59,11 @@ import javax.swing.KeyStroke;
 import javax.swing.JCheckBoxMenuItem;
 import java.awt.Toolkit;
 import javax.swing.ImageIcon;
+
+import com.bkhn.ltnc.vnetsim.algorithms.*;
+import com.bkhn.ltnc.vnetsim.myobjects.Edge;
+import com.bkhn.ltnc.vnetsim.myobjects.Graph;
+import com.bkhn.ltnc.vnetsim.myobjects.Vertex;
 
 import java.awt.Desktop;
 import java.io.File;

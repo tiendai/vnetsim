@@ -9,14 +9,12 @@
  *
  * @version 2.0 2011/4/12 
  */
-package ui;
+package com.bkhn.ltnc.vnetsim.ui;
 
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
 
-import myobjects.Graph;
-import myobjects.Vertex;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -26,6 +24,10 @@ import java.awt.Font;
 import javax.swing.JComboBox;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JScrollPane;
+
+import com.bkhn.ltnc.vnetsim.myobjects.Graph;
+import com.bkhn.ltnc.vnetsim.myobjects.Vertex;
+
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
 import java.util.ArrayList;

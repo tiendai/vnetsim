@@ -9,16 +9,18 @@
  *
  * @version 2.0 2011/4/12 
  */
-package ui;
+package com.bkhn.ltnc.vnetsim.ui;
 import java.awt.Dimension;
 
 import javax.swing.*;
-import myobjects.*;
 
 import java.awt.BorderLayout;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.TableColumn;
 import javax.swing.GroupLayout.Alignment;
+
+import com.bkhn.ltnc.vnetsim.myobjects.*;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Toolkit;

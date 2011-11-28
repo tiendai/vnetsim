@@ -10,7 +10,7 @@
  * @version 2.0 2011/4/12 
  */
 
-package algorithms;
+package com.bkhn.ltnc.vnetsim.algorithms;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -19,7 +19,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.Map;
-import myobjects.*;
+
+import com.bkhn.ltnc.vnetsim.myobjects.*;
 
 public class KruskalAlgorithm extends Thread{
 	private final List<Vertex> nodes;	// Tập các đỉnh

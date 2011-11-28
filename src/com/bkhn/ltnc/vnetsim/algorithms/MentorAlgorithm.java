@@ -11,7 +11,7 @@
  *
  * @version 2.0 2011/4/12
  */
-package algorithms;
+package com.bkhn.ltnc.vnetsim.algorithms;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,7 +19,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import myobjects.*;
+
+import com.bkhn.ltnc.vnetsim.myobjects.*;
 
 public class MentorAlgorithm {
 

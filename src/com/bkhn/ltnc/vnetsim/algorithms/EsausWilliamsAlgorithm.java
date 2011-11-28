@@ -10,7 +10,7 @@
  * @version 1.0 2011/4/18 
  */
 
-package algorithms;
+package com.bkhn.ltnc.vnetsim.algorithms;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,9 +19,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import myobjects.Edge;
-import myobjects.Graph;
-import myobjects.Vertex;
+import com.bkhn.ltnc.vnetsim.myobjects.Edge;
+import com.bkhn.ltnc.vnetsim.myobjects.Graph;
+import com.bkhn.ltnc.vnetsim.myobjects.Vertex;
+
 
 public class EsausWilliamsAlgorithm extends Thread{
 	private final Graph myGraph;
