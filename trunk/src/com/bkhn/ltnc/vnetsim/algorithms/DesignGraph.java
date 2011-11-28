@@ -13,11 +13,11 @@
  * @version 2.0 2011/4/12 
  */
 
-package algorithms;
+package com.bkhn.ltnc.vnetsim.algorithms;
 
-import myobjects.*;
 import java.util.*;
-import java.util.ArrayList;
+
+import com.bkhn.ltnc.vnetsim.myobjects.*;
 public class DesignGraph implements Runnable{
 	
 	public final int KRUSKAL = 0;

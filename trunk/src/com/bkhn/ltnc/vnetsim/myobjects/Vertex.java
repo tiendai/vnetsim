@@ -10,7 +10,7 @@
  * @version 2.0 2011/4/12 
  */
 
-package myobjects;
+package com.bkhn.ltnc.vnetsim.myobjects;
 import java.util.Comparator;
 import java.util.ArrayList;
 import java.util.HashSet;
