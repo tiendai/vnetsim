@@ -7,15 +7,16 @@
  *
  * @Usage: Sử dụng để khởi tạo các đỉnh trong đồ thị
  *
- * @version 2.0 2011/4/12 
+ * @version 2.0 2011/4/12
  */
 
 package com.bkhn.ltnc.vnetsim.myobjects;
-import java.util.Comparator;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
-public class Vertex implements Comparable<Object>{
+
+public class Vertex implements Comparable<Object> {
 
 	private int id;							// Tên của đỉnh
 	private int weight;						// Trọng số của đỉnh
@@ -28,7 +29,7 @@ public class Vertex implements Comparable<Object>{
 	/*
 	 * Nếu là nút backbone thì sẽ có một tập các nút access
 	 */
-	private Set<Vertex> access;
+	private final Set<Vertex> access;
 	/*
 	 * Các giá trị thể hiện vị trí của nút
 	 * Dùng để vẽ
@@ -36,11 +37,13 @@ public class Vertex implements Comparable<Object>{
 	private int x;      //Hoành độ
 	private int y;      //Tung độ
 
-	/*
+	/**
 	 * khoảng cách từ nút tới nút center
 	 * Chỉ sử dụng trong phương thức mentor.makeCMST();
 	 */
-	private double distance = Double.MAX_VALUE; //Khoảng cách tới nút Center, defaul = vô cùng
+	private double distance =
+			Double.MAX_VALUE;
+	//Khoảng cách tới nút Center, defaul = vô cùng
 
 	/*
 	 * Các hàm khởi tạo
@@ -54,7 +57,7 @@ public class Vertex implements Comparable<Object>{
 		this.id = name;
 		access = new HashSet<Vertex>();
 	}
-	public Vertex(int name, int weight){
+	public Vertex(int name, int weight) {
 		this.id = name;
 		this.weight = weight;
 		access = new HashSet<Vertex>();
@@ -65,8 +68,9 @@ public class Vertex implements Comparable<Object>{
 		access = new HashSet<Vertex>();
 	}
 	/*
-	 * Phương thức để gọi hàm so sánh theo trọng số (weight)
+	 * Phương thức để gọi hàm so sánh theo tên
 	 */
+	@Override
 	public int compareTo(Object obj){
 		if(this.id ==((Vertex)obj).getId())
 			return 0;
@@ -75,9 +79,10 @@ public class Vertex implements Comparable<Object>{
 		else return -1;
 	}
 	/*
-	 * Phương thức để gọi hàm so sánh theo tên đỉnh
+	 * Phương thức để gọi hàm so sánh theo trọng số
 	 */
 	public static Comparator<Object> WeightComparator = new Comparator<Object>(){
+		@Override
 		public int compare(Object o1,Object o2){
 			int v1 = ((Vertex)o1).getWeight();
 			int v2 = ((Vertex)o2).getWeight();
@@ -90,6 +95,7 @@ public class Vertex implements Comparable<Object>{
 	 * Phương thức so sánh theo chiều dài đến nút center
 	 */
 	public static Comparator<Object> DistanceComparator = new Comparator<Object>(){
+		@Override
 		public int compare(Object o1,Object o2){
 			double v1 = ((Vertex)o1).getDistance();
 			double v2 = ((Vertex)o2).getDistance();
@@ -155,7 +161,7 @@ public class Vertex implements Comparable<Object>{
 	}
 
 	/*
-	 * Các hàm thiết lập vị trí của nút trong đồ thị, sử dụng để vẽ và 
+	 * Các hàm thiết lập vị trí của nút trong đồ thị, sử dụng để vẽ và
 	 * để tạo các giá trị ngẫu nhiên cho trọng số, giá, lưu lượng ..v.v
 	 */
 	public int getX(){
@@ -219,10 +225,10 @@ public class Vertex implements Comparable<Object>{
 		}
 		return neighbours;
 	}
-	
+
 	/*
 	 * Lấy tập các nút của đồ thị mà đã được xây dựng
-	 * 
+	 *
 	 */
 	public ArrayList<Vertex> getNeighboursMENTOR(Graph myGraph){
 		ArrayList<Vertex> neighbours = new ArrayList<Vertex>();
