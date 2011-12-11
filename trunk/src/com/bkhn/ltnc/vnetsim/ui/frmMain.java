@@ -7,69 +7,63 @@
  *
  * @Usage: Run program
  *
- * @version 2.0 2011/11/27 
+ * @version 2.0 2011/11/27
  */
 package com.bkhn.ltnc.vnetsim.ui;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JMenu;
-import java.awt.Font;
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import javax.swing.JSlider;
-import javax.swing.JButton;
-import javax.swing.border.TitledBorder;
-import java.awt.Color;
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.Dimension;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.JScrollPane;
-import javax.swing.JTabbedPane;
-import javax.swing.JTextArea;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.SwingConstants;
-import javax.swing.JSeparator;
-import javax.swing.JTextField;
-import javax.swing.JComboBox;
-import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
-
-import java.awt.event.ActionListener;
+import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
-
-import javax.swing.event.ChangeListener;
-import javax.swing.event.ChangeEvent;
-
-
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import javax.swing.JCheckBox;
-import java.awt.event.ItemListener;
-import java.awt.event.ItemEvent;
-import javax.swing.KeyStroke;
-import javax.swing.JCheckBoxMenuItem;
-import java.awt.Toolkit;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JSeparator;
+import javax.swing.JSlider;
+import javax.swing.JTabbedPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.KeyStroke;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import javax.swing.border.TitledBorder;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import com.bkhn.ltnc.vnetsim.algorithms.DesignGraph;
 import com.bkhn.ltnc.vnetsim.myobjects.Edge;
 import com.bkhn.ltnc.vnetsim.myobjects.Graph;
 import com.bkhn.ltnc.vnetsim.myobjects.Vertex;
-
-import java.awt.Desktop;
-import java.io.File;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -79,15 +73,15 @@ public class frmMain {
 
 	/** The frm vnetsim. */
 	private JFrame frmVnetsim;			// Frame chương trình
-	
+
 	/** The frm progress. */
 	private JFrame frmProgress;			// Frame quá trình hoạt động
-	
+
 	/** The frm prop. */
 	private frmProperties frmProp;		// Frame xem thông số
 
 	/** The txta progress. */
-	public JTextArea txtaProgress;		
+	public JTextArea txtaProgress;
 
 	/** The status. */
 	private int status = 0;				// Biến trạng thái, sử dụng để chọn kiểu paint cho đồ thị
@@ -96,10 +90,10 @@ public class frmMain {
 	 * Biến chọn thuật toán cho mạng Access
 	 * algorithmSelect = 0 ==> KrusKal
 	 * algorithmSelect = 1 ==> Prim
-	 * algorithmSelect = 2 ==> Esaus-Williams	
+	 * algorithmSelect = 2 ==> Esaus-Williams
 	 */
 	/** The algorithm select. */
-	private int algorithmSelect = 0;	
+	private int algorithmSelect = 0;
 	/**
 	 *  font dùng chung cho chương trình.
 	 */
@@ -118,22 +112,22 @@ public class frmMain {
 
 	/** The lbl thong so hien thi. */
 	private JLabel lblThongSoHienThi;
-	
+
 	/** The lbl path. */
 	private JLabel lblPath;
-	
+
 	/** The lbl alpha. */
 	private JLabel lblAlpha;
-	
+
 	/** The lbl pc. */
 	private JLabel lblPc;
-	
+
 	/** The lbl threshold. */
 	private JLabel lblThreshold;
-	
+
 	/** The lbl rp d. */
 	private JLabel lblRpD;
-	
+
 	/** The lbl wmax. */
 	private JLabel lblWmax;
 
@@ -144,50 +138,50 @@ public class frmMain {
 	private Graph myGraph;				// Đồ thị chính của chương trình
 
 	/** The number of vertices. */
-	private int numberOfVertices = 50;// Mặc định đồ thị có 50 đỉnh        	
+	private int numberOfVertices = 50;// Mặc định đồ thị có 50 đỉnh
 	/*
 	 * Các tham số chính của chương trình
 	 */
 	/** The alpha. */
-	private double alpha = 0.5; 
-	
+	private double alpha = 0.5;
+
 	/** The pc. */
 	private double pc =0.5;
-	
+
 	/** The w threshold. */
 	private int wThreshold;
-	
+
 	/** The radius. */
-	private int radius;                       
-	
+	private int radius;
+
 	/** The length of graph. */
 	private int lengthOfGraph = 50;
-	
+
 	/** The w max4 an. */
 	private int wMax4AN;
 
 
 	/** The pnl noidung. */
 	private pnlDisplay pnlNoidung;
-	
+
 	/** The cbb algorithms. */
 	private JComboBox<Object> cbbAlgorithms;
-	
+
 	/** The pnl thamso. */
 	private JPanel pnlThamso;
-	
+
 	/** The sld threshold. */
 	private JSlider sldThreshold;
-	
+
 	/** The sld wmax4 an. */
 	private JSlider sldWmax4AN ;
-	
+
 	/** The txt gamma. */
 	private JTextField txtGamma;
-	
+
 	/** The cbb from. */
 	private JComboBox<Object> cbbFrom;
-	
+
 	/** The cbb to. */
 	private JComboBox<Object> cbbTo;
 
@@ -198,6 +192,7 @@ public class frmMain {
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
+			@Override
 			public void run() {
 				try {
 					frmMain window = new frmMain();
@@ -255,7 +250,7 @@ public class frmMain {
 		 * Khởi tạo đồ thị và các giá trị
 		 */
 		myGraph = new Graph(numberOfVertices);
-		wThreshold = (int)(myGraph.getMinOfWeights()+myGraph.getMaxOfWeights())/2;
+		wThreshold = (myGraph.getMinOfWeights()+myGraph.getMaxOfWeights())/2;
 		lengthOfGraph = Collections.max(myGraph.getEdges()).getCost();
 		radius = (int)(0.3 * lengthOfGraph);
 		wMax4AN = 3 * myGraph.getMaxOfWeights();
@@ -334,6 +329,7 @@ public class frmMain {
 
 		sldThreshold = new JSlider(JSlider.HORIZONTAL,wMin,wMax,(wMin+wMax)/2);
 		sldThreshold.addChangeListener(new ChangeListener() {
+			@Override
 			public void stateChanged(ChangeEvent arg0) {
 				JSlider sld = (JSlider)arg0.getSource();
 				if(!sld.getValueIsAdjusting()){
@@ -350,6 +346,7 @@ public class frmMain {
 
 		btnGenerate = new JButton("Generate");
 		btnGenerate.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				try{
 					int num = Integer.parseInt(txtN.getText());
@@ -357,7 +354,7 @@ public class frmMain {
 					if(num>200)throw new IndexOutOfBoundsException();
 					numberOfVertices = num;
 					txtaProgress.append("* Khởi tạo đồ thị mới với số đỉnh N = "+numberOfVertices+"\n");
-					myGraph = new Graph(numberOfVertices);                                     
+					myGraph = new Graph(numberOfVertices);
 
 					status = 0;
 					updateSlider();
@@ -395,6 +392,7 @@ public class frmMain {
 
 		JSlider sldAlpha = new JSlider(JSlider.HORIZONTAL,0,10,5);
 		sldAlpha.addChangeListener(new ChangeListener() {
+			@Override
 			public void stateChanged(ChangeEvent arg0) {
 				JSlider sld = (JSlider)arg0.getSource();
 				if(!sld.getValueIsAdjusting()){
@@ -447,6 +445,7 @@ public class frmMain {
 
 		JSlider sldRpD = new JSlider(JSlider.HORIZONTAL,0,10,3);
 		sldRpD.addChangeListener(new ChangeListener() {
+			@Override
 			public void stateChanged(ChangeEvent arg0) {
 				JSlider sld = (JSlider)arg0.getSource();
 				if(!sld.getValueIsAdjusting()){
@@ -490,6 +489,7 @@ public class frmMain {
 		pnlThamso.add(lblPc, gbc_lblPc);
 		JSlider sldPc = new JSlider(JSlider.HORIZONTAL,0,10,5);
 		sldPc.addChangeListener(new ChangeListener() {
+			@Override
 			public void stateChanged(ChangeEvent arg0) {
 				JSlider sld = (JSlider)arg0.getSource();
 				if(!sld.getValueIsAdjusting()){
@@ -523,6 +523,7 @@ public class frmMain {
 
 		sldWmax4AN = new JSlider(JSlider.HORIZONTAL,(2*wMax),(6*wMax),(3*wMax));
 		sldWmax4AN.addChangeListener(new ChangeListener() {
+			@Override
 			public void stateChanged(ChangeEvent arg0) {
 				JSlider sld = (JSlider)arg0.getSource();
 				if(!sld.getValueIsAdjusting()){
@@ -558,6 +559,7 @@ public class frmMain {
 
 		chbAccessNetwork = new JCheckBox("Hiện Access Network");
 		chbAccessNetwork.addItemListener(new ItemListener() {
+			@Override
 			public void itemStateChanged(ItemEvent evt) {
 				int state = evt.getStateChange();
 				if(state == ItemEvent.SELECTED){
@@ -582,6 +584,7 @@ public class frmMain {
 		});
 		cbbAlgorithms = new JComboBox<Object>(algorithms);
 		cbbAlgorithms.addItemListener(new ItemListener() {
+			@Override
 			public void itemStateChanged(ItemEvent arg0) {
 				algorithmSelect = cbbAlgorithms.getSelectedIndex();
 				if(status!=0)updateMentorGraph();
@@ -608,6 +611,7 @@ public class frmMain {
 
 		btnStart = new JButton("Start");
 		btnStart.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				txtaProgress.append("* Đang xây dựng mạng ...");
 				if(chbAccessNetwork.isSelected()) status = 1;
@@ -658,6 +662,7 @@ public class frmMain {
 
 		JButton btnGo = new JButton("Go!");
 		btnGo.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				if(status == 0) JOptionPane.showMessageDialog(frmVnetsim, "Mạng chưa tối ưu !\nKhông thể tìm thấy đường đi");
 				else {
@@ -670,7 +675,7 @@ public class frmMain {
 						JOptionPane.showMessageDialog(frmVnetsim, "Hai đỉnh giống nhau !");
 						txtaProgress.append("* Tìm đường thất bại !\n");
 					}
-					else {						
+					else {
 						List<Vertex> path = getPath(fromNode,toNode,myGraph);
 						txtaProgress.append("* Đang xây dựng đường đi ...\n");
 						StringBuilder sPath = new StringBuilder("Đường đi = ");
@@ -809,6 +814,7 @@ public class frmMain {
 		mntmExit.setIcon(new ImageIcon(frmMain.class.getResource("/VnetsimIcons/iconExit.png")));
 		mntmExit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0));
 		mntmExit.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				System.exit(0);
 			}
@@ -825,6 +831,7 @@ public class frmMain {
 		mntmMatTraffic.setIcon(new ImageIcon(frmMain.class.getResource("/VnetsimIcons/iconTraffic.png")));
 		mntmMatTraffic.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F5, 0));
 		mntmMatTraffic.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				frmTraffics matW = new frmTraffics(myGraph);
 				matW.setVisible(true);
@@ -834,6 +841,7 @@ public class frmMain {
 		JCheckBoxMenuItem chbmLog = new JCheckBoxMenuItem("Log");
 		chbmLog.setIcon(new ImageIcon(frmMain.class.getResource("/VnetsimIcons/iconLog.png")));
 		chbmLog.addItemListener(new ItemListener() {
+			@Override
 			public void itemStateChanged(ItemEvent evt) {
 				int state = evt.getStateChange();
 				if(state == ItemEvent.SELECTED){
@@ -855,6 +863,7 @@ public class frmMain {
 		mntmCosts.setIcon(new ImageIcon(frmMain.class.getResource("/VnetsimIcons/iconCost.png")));
 		mntmCosts.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F6, 0));
 		mntmCosts.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				frmCosts matC = new frmCosts(myGraph);
 				matC.setVisible(true);
@@ -866,9 +875,10 @@ public class frmMain {
 		JMenuItem mntmProperties = new JMenuItem("Properties");
 		mntmProperties.setIcon(new ImageIcon(frmMain.class.getResource("/VnetsimIcons/iconProperties.png")));
 		mntmProperties.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {				
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
 				frmProp = new frmProperties(myGraph);
-				frmProp.setVisible(true);			
+				frmProp.setVisible(true);
 
 			}
 		});
@@ -881,6 +891,7 @@ public class frmMain {
 		JMenuItem mntmChangeLaf = new JMenuItem("Change LAF");
 		mntmChangeLaf.setIcon(new ImageIcon(frmMain.class.getResource("/VnetsimIcons/iconChangeLAF.png")));
 		mntmChangeLaf.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				Object[] optionLAF = {"Nimbus","Metal","CDE/Motif","Windows","Windows Classic"};
 				int item = JOptionPane.showOptionDialog(null,
@@ -912,6 +923,7 @@ public class frmMain {
 
 		JMenuItem mntmHelpContents = new JMenuItem("Help Contents");
 		mntmHelpContents.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				try{
 					//Runtime.getRuntime().exec("hh.exe myhelpfile.chm");
@@ -940,6 +952,7 @@ public class frmMain {
 		mntmAboutUs.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F12, 0));
 		mntmAboutUs.setFont(myfont);
 		mntmAboutUs.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				String mess = "Vnetsim\nversion 11.04"
 						+"\nPhần mềm mô phỏng topology mạng phân tán"
@@ -956,7 +969,7 @@ public class frmMain {
 						JOptionPane.INFORMATION_MESSAGE );
 			}
 		});
-		mnHelp.add(mntmAboutUs);	
+		mnHelp.add(mntmAboutUs);
 
 
 
@@ -999,7 +1012,7 @@ public class frmMain {
 
 	/*
 	 * Phương thức lấy đường đi giữa 2 nút
-	 * Thuật toán : lấy liên tiếp các nút parent cho tới khi nút parent trùng nhau thì dừng và 
+	 * Thuật toán : lấy liên tiếp các nút parent cho tới khi nút parent trùng nhau thì dừng và
 	 * xử lý các danh sách sinh ra
 	 */
 	/**
@@ -1079,21 +1092,24 @@ public class frmMain {
 		switch (status) {
 		case 1:
 			DesignGraph dg1 = new DesignGraph(myGraph, wThreshold, alpha, pc,radius,lengthOfGraph,algorithmSelect,wMax4AN);
-			dg1.run();
+			Thread t1 = new Thread(dg1);
+			t1.run();
 			updateThongSoHienThi();
 			pnlNoidung.newPaint(myGraph, 1);
 			frmVnetsim.repaint();
 			break;
 		case 2:
 			DesignGraph dg2 = new DesignGraph(myGraph, wThreshold, alpha, pc,radius,lengthOfGraph,algorithmSelect,wMax4AN);
-			dg2.run();
+			Thread t2 = new Thread(dg2);
+			t2.run();
 			updateThongSoHienThi();
 			pnlNoidung.newPaint(myGraph, 2);
 			frmVnetsim.repaint();
 			break;
 		case 3:
 			DesignGraph dg3 = new DesignGraph(myGraph, wThreshold, alpha, pc,radius,lengthOfGraph,algorithmSelect,wMax4AN);
-			dg3.run();
+			Thread t3 = new Thread(dg3);
+			t3.run();
 			updateThongSoHienThi();
 			pnlNoidung.newPaint(myGraph, 3);
 			frmVnetsim.repaint();
@@ -1131,7 +1147,7 @@ public class frmMain {
 		int min = myGraph.getMinOfWeights();
 		sldThreshold.setMaximum(max);
 		sldThreshold.setMinimum(min);
-		sldThreshold.setValue((int)((max+min)/2));
+		sldThreshold.setValue(((max+min)/2));
 		sldWmax4AN.setMaximum(6*max);
 		sldWmax4AN.setMinimum(2*max);
 		sldWmax4AN.setValue(3*max);
