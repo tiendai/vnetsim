@@ -10,20 +10,28 @@
  *
  * @Usage: Sử dụng để tối ưu các đồ thị
  *
- * @version 2.0 2011/4/12 
+ * @version 2.0 2011/4/12
  */
 
 package com.bkhn.ltnc.vnetsim.algorithms;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
-import com.bkhn.ltnc.vnetsim.myobjects.*;
+import com.bkhn.ltnc.vnetsim.myobjects.Edge;
+import com.bkhn.ltnc.vnetsim.myobjects.Graph;
+import com.bkhn.ltnc.vnetsim.myobjects.Vertex;
+
 public class DesignGraph implements Runnable{
-	
+
 	public final int KRUSKAL = 0;
 	public final int PRIM = 1;
 	public final int ESAUSWILLIAMS = 2;
-	
+
 	private Graph myGraph;
 	private int wThreshold;
 	private double alpha;
@@ -32,7 +40,7 @@ public class DesignGraph implements Runnable{
 	private int lengthOfGraph;
 	private int algorithmSelect;
 	private int wmax;
-	
+
 	public DesignGraph(Graph myGraph, int wThreshold, double alpha,double pc,int radius, int lengthOfGraph,int algorithmSelect, int wmax){
 		this.myGraph = myGraph;
 		this.wThreshold = wThreshold;
@@ -71,7 +79,7 @@ public class DesignGraph implements Runnable{
 			McValue.put(node, value);
 		}
 		Vertex center =null;
-		for(Vertex node :myGraph.getVertices()){                    
+		for(Vertex node :myGraph.getVertices()){
 			if(center == null){
 				center = node;
 			}else if(McValue.get(node)<McValue.get(center)){
@@ -149,7 +157,7 @@ public class DesignGraph implements Runnable{
 				if((!node.isConnected())&&(node.inCircle(maxFc, radius))){
 					node.setStatus("NORMAL");
 					maxFc.getAccess().add(node);
-					listNotConnected.remove(node);					
+					listNotConnected.remove(node);
 					FcValue.remove(node);
 				}
 			}
@@ -185,8 +193,8 @@ public class DesignGraph implements Runnable{
 			Set<Vertex> accNodes = backbone.getAccess();
 			//System.out.println("Xet nut backbone "+backbone);
 			if(!accNodes.isEmpty()){
-				//System.out.println("Nut access "+accNodes);				
-				accNodes.add(backbone);                            
+				//System.out.println("Nut access "+accNodes);
+				accNodes.add(backbone);
 				List<Edge> accEdges = new ArrayList<Edge>();
 				for(Edge ed: myGraph.getEdges()){
 					if((accNodes.contains(ed.getSource()))&&
@@ -198,7 +206,7 @@ public class DesignGraph implements Runnable{
 				ArrayList<Vertex> accNodesList = new ArrayList<Vertex>(accNodes);
 				accNodesList.add(backbone);
 				Graph accGraph = new Graph(accNodesList, accEdges);
-				
+
 				switch (algorithmSelect) {
 				case 0:
 					Thread krk = new KruskalAlgorithm(accGraph, wmax,backbone);
@@ -217,8 +225,8 @@ public class DesignGraph implements Runnable{
 					kruskal.start();
 					break;
 				}
-				
-				
+
+
 			}
 		}
 
@@ -226,8 +234,8 @@ public class DesignGraph implements Runnable{
 	}
 
 	@Override
-	public void run() {		
-		this.makeGraph();		
+	public void run() {
+		this.makeGraph();
 	}
 
 }
