@@ -1,0 +1,2 @@
+tìm hiểu về các thuật toán xây dựng mạng
+truy nhập (Access Network) như Kruskal, Prim, Esaus Williams, và thuật toán MENTOR ( Mesh Network Topology Optimization Routing ) để xây dựng các mạng đường trục (Backbone Network).
